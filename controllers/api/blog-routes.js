@@ -1,11 +1,14 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
+const { Comment } = require('../../models');
 const Blog = require('../../models/Blog');
 
 // GET all blog posts 
 router.get('/', async (req, res) => {
 
-  const blogData = await Blog.findAll({});
+  const blogData = await Blog.findAll({
+    include: [ { model: Comment }]
+  });
   console.log(blogData);
 
   const blogs = blogData.map((blog) => blog.get({plain:true}));
