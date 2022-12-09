@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, STRING } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Blog extends Model {}
@@ -27,6 +27,15 @@ Blog.init(
       type: DataTypes.STRING, //need to figure out how to get this to pull in automatically
       allowNull: false,
     },
+    comment_id: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      references: {
+        model: "comment",
+        key: "id"
+      }
+
+    }
   },
   {
     sequelize,
